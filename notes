@@ -11,3 +11,10 @@
 * kubenettes doesn't handle anything contairization or networking or storage it's has interfaces that plugs to it and work with them
 
 * k3s builds all the binaries that it needs and embed them inside the binary using embed fs a golang feature
+
+
+* vagrant used for creating vms (with the concept of Infrastructure as Code) so you define everything in a vagrant file and vagrant takes care of creating the vm
+* vagrant have a concept of boxes which are the actual periconfigured vm the actual thing that vagrant runs
+* and vagrant does run the actual boxes on it's own it needs a provider and (please check the box and which providers it can be run on)
+* when vagrant vms are running vagrant adds an ssh tunnel to enter your vm
+* to configure your vm to your actual need you can use vagratn previsioning (config.vm.provision)
