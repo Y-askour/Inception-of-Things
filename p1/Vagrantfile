@@ -1,13 +1,27 @@
+SERVER_NAME = "yaskourS"
+WORKER_NAME = "yaskourSW"
+
+SERVER_IP = "192.168.56.110"
+WORKER_IP = "192.168.56.111"
+
 Vagrant.configure("2") do |config|
-
-  config.vm.define "1" do |2|
-    config.vm.box = "ubuntu/trusty64"
-    config.vm.box_version = "20191107.0.0"
+  # common config
+  config.vm.box = "ubuntu/trusty64" #  NOTE: this should be changed to a and actual box_url (we should choose a distro)
+  config.vm.box_version = "20191107.0.0"
+  config.vm.provider "virtualbox" do |vb|
+      vb.memory =  512
+      vb.cpus = 1
   end
 
-  config.vm.define "2" do |2|
-    config.vm.box = "ubuntu/trusty64"
-    config.vm.box_version = "20191107.0.0"
+  config.vm.provision :shell, inline: "hostname"
+
+  config.vm.define SERVER_NAME do |server|
+    server.vm.network "private_network", ip: SERVER_IP
+    server.vm.hostname = SERVER_NAME
   end
 
+  config.vm.define WORKER_NAME do |workerServer|
+    workerServer.vm.network "private_network", ip: WORKER_IP
+    workerServer.vm.hostname = WORKER_NAME
+  end
 end
